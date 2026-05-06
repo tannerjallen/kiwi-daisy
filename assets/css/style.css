@@ -1,21 +1,35 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --teal: #01818C;
-  --white: #FFFFFF;
-  --card-shadow: 0 1.75rem 2rem rgba(0,0,0,0.14);
-  --card-radius: 0.875rem;
-  --font: 'Sometype Mono', monospace;
+  --cream:       #F5EAD5;
+  --cream-card:  #EDE0C4;
+  --kraft:       #B8965A;
+  --teal:        #2B7878;
+  --mustard:     #C9930A;
+  --coral:       #BF4A3A;
+  --olive:       #5C6B2E;
+  --charcoal:    #2A2220;
+  --charcoal-lt: #4A3F3A;
+
+  --card-shadow: 0 2px 8px rgba(42,34,32,0.12), 0 6px 24px rgba(42,34,32,0.08);
+  --card-radius: 0.25rem;
+
+  --font-script: 'Pacifico', cursive;
+  --font-type:   'Special Elite', 'Courier New', monospace;
+  --font-hand:   'Caveat', cursive;
 }
 
 html { font-size: 18px; }
 
+/* ── Paper background ── */
+
 body {
-  font-family: var(--font);
+  font-family: var(--font-type);
   min-height: 100vh;
-  background: linear-gradient(160deg, #0d2b24 0%, #1a4a3a 35%, #0a3440 70%, #015c68 100%);
-  background-attachment: fixed;
-  color: var(--white);
+  background-color: var(--cream);
+  /* Subtle paper grain via SVG noise */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  color: var(--charcoal);
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -39,57 +53,88 @@ body {
 }
 
 #header h1 {
-  font-family: var(--font);
-  font-size: clamp(2rem, 8vw, 4rem);
+  font-family: var(--font-script);
+  font-size: clamp(2.6rem, 9vw, 5rem);
   font-weight: 400;
-  color: var(--white);
-  text-shadow: 0.125rem 0 0.5rem rgba(255,255,255,0.6);
-  line-height: 1.1;
+  color: var(--charcoal);
+  line-height: 1;
+  letter-spacing: -0.01em;
 }
 
-#header h1 strong {
-  color: var(--teal);
-}
-
-.wave-divider {
+#header .art-subtitle {
   display: block;
-  margin: 1rem auto;
-  width: 8rem;
-  height: 1.4rem;
-  opacity: 0.9;
+  font-family: var(--font-type);
+  font-size: clamp(0.75rem, 2.5vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--charcoal-lt);
+  margin-top: 0.35rem;
+}
+
+/* Peace ☮ Heart ♥ Daisy ✿ divider */
+.brand-trio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 1.1rem 0 0.9rem;
+}
+
+.brand-trio .dash {
+  color: var(--kraft);
+  font-size: 1.1rem;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.brand-trio svg {
+  width: 1.7rem;
+  height: 1.7rem;
+  flex-shrink: 0;
 }
 
 #header .location {
-  font-family: var(--font);
-  font-size: 1.1rem;
-  color: var(--white);
-  text-shadow: 0.125rem 0 0.44rem rgba(255,255,255,0.5);
-  letter-spacing: 0.05em;
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  color: var(--charcoal-lt);
+  letter-spacing: 0.04em;
+}
+
+#header .tagline {
+  font-family: var(--font-type);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--kraft);
+  margin-top: 0.4rem;
 }
 
 /* ── Gallery ── */
 
 #gallery-section {
-  background: var(--white);
+  background: var(--cream-card);
   border-radius: var(--card-radius);
   box-shadow: var(--card-shadow);
-  padding: 2rem;
+  border: 1px solid rgba(184,150,90,0.3);
+  padding: 1.5rem;
   width: 100%;
 }
 
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
 
 .gallery-grid a {
   display: block;
   overflow: hidden;
-  border-radius: 0.25rem;
+  border-radius: 0.15rem;
   cursor: zoom-in;
   text-decoration: none;
   aspect-ratio: 3/4;
+  border: 1px solid rgba(184,150,90,0.2);
 }
 
 .gallery-grid a img {
@@ -98,11 +143,13 @@ body {
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform 0.35s ease;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  filter: saturate(0.92) sepia(0.06);
 }
 
 .gallery-grid a:hover img {
-  transform: scale(1.04);
+  transform: scale(1.05);
+  filter: saturate(1.05) sepia(0);
 }
 
 /* ── Social Icons ── */
@@ -110,7 +157,7 @@ body {
 .social-icons {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
   align-items: center;
 }
 
@@ -121,20 +168,26 @@ body {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  border: 2px solid var(--white);
-  color: var(--white);
+  border: 2px solid var(--teal);
+  background: transparent;
   text-decoration: none;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.2s, transform 0.2s;
 }
 
 .social-icons a:hover {
-  background: rgba(255,255,255,0.15);
+  background: var(--teal);
+  transform: scale(1.08);
 }
 
 .social-icons svg {
   width: 55%;
   height: 55%;
-  fill: var(--white);
+  fill: var(--teal);
+  transition: fill 0.2s;
+}
+
+.social-icons a:hover svg {
+  fill: var(--cream);
 }
 
 .social-icons .label {
@@ -149,12 +202,12 @@ body {
 /* ── About ── */
 
 #about {
-  background: var(--white);
+  background: var(--cream-card);
   border-radius: var(--card-radius);
   box-shadow: var(--card-shadow);
+  border: 1px solid rgba(184,150,90,0.3);
   padding: 2.5rem;
   width: 100%;
-  color: #1a1a1a;
 }
 
 .about-columns {
@@ -166,24 +219,25 @@ body {
 
 .about-image img {
   width: 100%;
-  border-radius: 0.5rem;
+  border-radius: 0.15rem;
   display: block;
+  border: 1px solid rgba(184,150,90,0.3);
+  filter: sepia(0.08) saturate(0.95);
 }
 
 .about-text h2 {
-  font-family: var(--font);
-  font-size: 1.5rem;
-  font-weight: 400;
+  font-family: var(--font-hand);
+  font-size: 1.8rem;
+  font-weight: 700;
   color: var(--teal);
-  text-shadow: 0.125rem 0 0.44rem rgba(255,255,255,0.4);
   margin-bottom: 0.75rem;
 }
 
 .about-text p {
-  font-family: var(--font);
-  font-size: 0.9rem;
-  line-height: 1.7;
-  color: #333;
+  font-family: var(--font-type);
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: var(--charcoal-lt);
 }
 
 /* ── Lightbox ── */
@@ -191,7 +245,7 @@ body {
 #lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(10,10,10,0.88);
+  background: rgba(42,34,32,0.92);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -210,15 +264,13 @@ body {
   max-width: 90vw;
   max-height: 90vh;
   object-fit: contain;
-  border-radius: 0.25rem;
-  box-shadow: 0 2rem 4rem rgba(0,0,0,0.5);
+  border-radius: 0.15rem;
+  box-shadow: 0 2rem 5rem rgba(0,0,0,0.6);
   transform: scale(0.96);
   transition: transform 0.3s;
 }
 
-#lightbox.open img {
-  transform: scale(1);
-}
+#lightbox.open img { transform: scale(1); }
 
 .lb-close {
   position: fixed;
@@ -227,7 +279,7 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--white);
+  color: var(--cream);
   font-size: 2rem;
   line-height: 1;
   opacity: 0.7;
@@ -243,7 +295,7 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--white);
+  color: var(--cream);
   font-size: 2.5rem;
   opacity: 0.55;
   transition: opacity 0.2s;
@@ -251,7 +303,6 @@ body {
 }
 
 .lb-nav:hover { opacity: 1; }
-
 #lb-prev { left: 0.5rem; }
 #lb-next { right: 0.5rem; }
 
